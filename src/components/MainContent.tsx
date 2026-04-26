@@ -17,10 +17,15 @@ export const MainContent: React.FC = () => {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const q = query(collection(db, 'songs'), orderBy('genre'), limit(100));
-      const snap = await getDocs(q);
-      setSongs(snap.docs.map(d => ({ id: d.id, ...d.data() } as Song)));
-      setLoading(false);
+      try {
+        const q = query(collection(db, 'songs'), limit(100));
+        const snap = await getDocs(q);
+        setSongs(snap.docs.map(d => ({ id: d.id, ...d.data() } as Song)));
+      } catch (error) {
+        console.error("Error loading songs:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchSongs();
   }, []);
