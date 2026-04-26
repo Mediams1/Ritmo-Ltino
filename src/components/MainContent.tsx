@@ -44,10 +44,10 @@ export const MainContent: React.FC = () => {
   const genres = Array.from(new Set(songs.map(s => s.genre)));
 
   const recommendedSongs = songs.filter(s => 
-    profile?.likedGenres.includes(s.genre) && !profile?.history.includes(s.id)
+    profile?.likedGenres?.includes(s.genre) && !profile?.history?.includes(s.id)
   ).slice(0, 6);
 
-  if (loading) return <div className="flex-1 flex items-center justify-center bg-spotify-black">Cargando ritmo...</div>;
+  if (loading) return <div className="flex-1 flex items-center justify-center bg-spotify-black text-white font-bold">Cargando ritmo latino...</div>;
 
   return (
     <main className="flex-1 overflow-hidden bg-gradient-to-b from-[#222] to-spotify-black flex flex-col">
@@ -134,20 +134,20 @@ export const MainContent: React.FC = () => {
               </div>
               <div className="mt-2 space-y-1 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
                 {songs.map((song, i) => (
-                  <div key={song.id} className="grid grid-cols-[30px_1fr_120px_120px_80px_80px] gap-4 py-2 hover:bg-white/5 rounded px-2 items-center transition-colors group">
+                  <div key={song.id} className="grid grid-cols-[30px_1fr_120px_120px_80px_80px] gap-4 py-2 border-b border-white/5 hover:bg-white/5 rounded px-2 items-center transition-colors group">
                     <span className="group-hover:text-white transition-colors">{i + 1}</span>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col min-w-0">
                       <span className="text-white font-medium truncate">{song.title}</span>
-                      <span className="text-[10px] text-spotify-light-gray">{song.artist}</span>
+                      <span className="text-[10px] text-spotify-light-gray truncate">{song.artist}</span>
                     </div>
                     <div>
                       <span className="bg-spotify-green/20 text-spotify-green px-2 py-0.5 rounded-full border border-spotify-green/30 text-[10px] inline-block font-bold">
                         {song.genre}
                       </span>
                     </div>
-                    <span>{song.releaseDate ? format(new Date(song.releaseDate), 'dd MMM yyyy') : 'N/A'}</span>
+                    <span>{song.releaseDate ? format(new Date(song.releaseDate), 'dd/MM/yyyy') : '---'}</span>
                     <span>{Math.floor(song.duration / 60)}:{String(song.duration % 60).padStart(2, '0')}</span>
-                    <span className="uppercase text-[9px] font-bold bg-white/10 px-1.5 py-0.5 rounded text-white">{song.fileType.split('/')[1] || 'mp3'}</span>
+                    <span className="uppercase text-[9px] font-bold bg-white/10 px-1.5 py-0.5 rounded text-white tracking-widest">{song.fileType?.split('/')[1] || 'AAC'}</span>
                   </div>
                 ))}
               </div>

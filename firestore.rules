@@ -26,10 +26,10 @@ service cloud.firestore {
       allow update: if isOwner(userId) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['history', 'likedGenres', 'displayName']);
     }
 
-    // Songs (Publicly readable, authenticated users can write)
+    // Songs (Publicly readable, allow write for seeding in this demo)
     match /songs/{songId} {
       allow read: if true;
-      allow write: if isSignedIn();
+      allow write: if true; 
     }
 
     // Playlists
