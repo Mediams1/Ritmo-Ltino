@@ -1,0 +1,6 @@
+{
+  "name": "Ritmo Latino",
+  "description": "A high-fidelity Spotify replica with Apple Music integration, smart recommendations, and managed Latin music catalogs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
